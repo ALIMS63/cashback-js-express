@@ -18,7 +18,7 @@ const app = express();
 
 // Подключаем mongoose.
 const mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost:27017/broccoli', { useNewUrlParser: true, useUnifiedTopology: true });/////
+mongoose.connect('mongodb+srv://pavel:134qerADF@cluster0.bnkdi.mongodb.net/<dbname>?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
