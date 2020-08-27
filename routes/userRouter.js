@@ -5,7 +5,7 @@ const router = express.Router();
 
 router
   .get('/', async (req, res) => {
-    const user = await User.findOne({ number: '+7(777) 777 - 77 - 77' }).populate('cashbackHistory');
+    const user = await User.findOne({ number: '+7(777) 999 - 77 - 77' }).populate('cashbackHistory');
     console.log(user);
     const total = user.cashbackHistory.reduce((sum, obj) => sum + obj.cashback, 0);
     user.cashbackAll = total;
@@ -14,6 +14,3 @@ router
   });
 
 module.exports = router;
-
-// const bcrypt = require('bcrypt');
-// const salt = 10;
