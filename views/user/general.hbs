@@ -1,0 +1,39 @@
+<nav class="nav nav-pills nav-justified bg-primary border border-bottom-10">
+  <a class="nav-item nav-link text-white" href="/user">Статистика</a>
+  <a class="nav-item nav-link text-white" href="/">Link</a>
+  <a class="nav-item nav-link text-white" href="/">Link</a>
+</nav>
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Причина зачисления</th>
+      <th scope="col">Сумма заказа</th>
+      <th scope="col">Дата</th>
+      <th scope="col">Сумма кэш-бэка</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each arr}}
+    <tr id="{{_id}}">
+      <th scope="row">{{cause}}</th>
+      <td>{{cost}}</td>
+      <td>{{createdAt}}</td>
+      <td>{{cashback}}</td>
+    </tr>
+
+    {{/each}}
+  </tbody>
+  <thead class="thead-light">
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      {{#if total}}
+      <th class="text-success" scope="col">Total: {{total}}</th>
+      {{else}}
+      <th class="text-danger" scope="col">Total: {{total}}</th>
+      {{/if}}
+    </tr>
+  </thead>
+</table>
