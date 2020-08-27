@@ -14,8 +14,7 @@ router
     res.render('admin/newUser');
   })
   .post('/createUser', async (req, res) => {
-
-    let newUser = await new User({ number: req.body.phone, password: req.body.pass });
+    let newUser = await new User({ number: req.body.phone, password: req.body.pass, cashbackAll: 0 }).save();
     res.redirect('/admin');
   })
   .post('/addCashback', (req, res) => {
@@ -23,7 +22,13 @@ router
   })
   .post('/addCashbackOn', async (req, res) => {
     console.log(req.body);
-    let newCashback = await new Cashback({ });
+    let newCashback = await new Cashback({ cashback: req.body.cashback, cost: req.body.orderCost, cause: req.body.cause, }).save();
+    let userForUpdate = await User.findOne({ number: req.body.phone });
+    let cashbackCalc = parseInt(req.body.cashback) + userForUpdate.cashbackAll;
+    let userCashback = userForUpdate.cashbackHistory;
+    console.log(newCashback._id);
+    userCashback.push(newCashback._id)
+    let userUpdate = await User.updateOne({ _id: userForUpdate._id }, { cashbackAll: cashbackCalc, cashbackHistory: userCashback });
     res.redirect('/admin');
   })
   .post('/unload', async (req, res) => {
