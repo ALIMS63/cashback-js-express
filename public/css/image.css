@@ -1,12 +1,16 @@
-body {
-  background-image: url(../img/4a6f7b8e-e988-412d-9ecc-61cd586824c0.jpeg)
-}
+/* body {
+  background-image: url(../img/startImage.jpeg);
+  /* background-image: url(../img/4a6f7b8e-e988-412d-9ecc-61cd586824c0.jpeg) */
+
+/* background-image: url(../img/normImage.png) */
+
+/* } */
 
 a {
   text-decoration: none;
-  /* Отменяем подчеркивание у ссылки */
   margin: 100px 50px;
   color: rgb(255, 255, 255);
+  color: blue;
   padding: 0.5em
 }
 
