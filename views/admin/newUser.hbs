@@ -1,14 +1,29 @@
+<nav class="nav nav-pills nav-justified bg-success border border-bottom-10">
+  <a id="create" class="nav-item nav-link text-white" href="/admin/create">Create new User</a>
+  <a id="charge" class="nav-item nav-link text-white" href="/admin/addCashback">Charge cashback</a>
+  <a id="unload" class="nav-item nav-link text-white" href="/admin/unload">Unload Cashback</a>
+  <a id="delete" class="nav-item nav-link text-white" href="/admin/delete">Delete User</a>
+</nav>
+
 <div id="container">
-  <h1>Create New User</h1>
-  <form action="/admin/createUser" method="post">
-    <label>Phone</label>
-    <input id="phoneNumber" type="tel" name="phone" placeholder="Phone" value="+7" maxlength="21">
-    <label>Password</label>
-    <input type="text" name="pass" placeholder="Password">
-    <div id="passGen">Generate password</div>
-    <button type="submit">Create</button>
-  </form>
+  <div class="row justify-content-md-center">
+    <div class="col-8">
+      <h1>Create New User</h1>
+      <form action="/admin/createUser" method="post">
+        <div class="form-group">
+          <label>Phone</label>
+          <input name="phone" type="tel" class="form-control" id="phoneNumber" value="+7" maxlength="21">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input name="pass" type="text" class="form-control" id="exampleInputPassword1">
+        </div>
+
+        <a href="#" id="passGen">Generate password</a>
+        <button type="submit" class="btn btn-success btn-block">Create</button>
+      </form>
+    </div>
+  </div>
 </div>
 
-<script src="/js/application.js"></script>
-<script src="/js/phonevalidation.js"></script>
+
