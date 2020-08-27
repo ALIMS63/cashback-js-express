@@ -12,6 +12,11 @@ router.use((req, res, next) => {
   next()
 })
 
+router.route('/image')
+  .get((req, res) => {
+    res.render('index');
+  })
+
 router.get('/', (req, res) => {
   res.render('authorization');
 });
