@@ -1,0 +1,21 @@
+#navbarmain {
+  background-image: url(../img/testbc.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 120px;
+}
+
+#menu {
+  width: 80%;
+  margin: auto;
+  padding-top: 30px;
+}
+
+#logo {
+  width: 120px;
+  height: auto;
+}
+
+#logout {
+  color: black;
+}
