@@ -11,6 +11,9 @@
         placeholder="Password">
     </div>
     <button type="submit" class="btn btn-primary">Sing in</button>
+    {{#if invalidpass}}
+    <h1>Invalid</h1>
+    {{/if}}
   </form>
 </div>
 
