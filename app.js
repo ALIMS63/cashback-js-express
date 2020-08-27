@@ -46,19 +46,6 @@ app.use(
   })
 );
 
-// app.use((req, res, next) => {
-//   res.locals.isAuth = !!req.session.user;
-//   if (req.session.user) {
-//     res.locals.user = req.session.user;
-//     res.locals.userName = req.session.user.name;
-//   };
-//   if (req.cookies.user_sid && !req.session.user) {
-//     res.clearCookie('user_sid');
-//   };
-//   next();
-// });
-
-
 
 // Allows you to use PUT, DELETE with forms.
 app.use(methodOverride(function (req, res) {
@@ -80,12 +67,15 @@ app.use((req, res, next) => {
   }
   //проверка прав
   if (req.session.admin === true) {
+    res.locals.logout = true
     req.session.author = true
   } else if (req.session.admin === false) {
+    res.locals.logout = true
     req.session.author = true
   }
   next()
 })
+
 
 app.use('/', mainRouter);
 

@@ -35,4 +35,11 @@ router.post('/api', async (req, res) => {
   res.redirect('/')
 })
 
+router.get('/api/logout', (req, res) => {
+  console.log('im here')
+  req.session.destroy()
+  res.locals.logout = false
+  res.redirect('/')
+})
+
 module.exports = router;
