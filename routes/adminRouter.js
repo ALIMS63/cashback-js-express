@@ -55,6 +55,9 @@ router
     }
     res.redirect('/admin')
   })
+<<<<<<< HEAD
 
+=======
+>>>>>>> 93b1c26e897cb5011674668c3529524566399ea8
 
 module.exports = router;
