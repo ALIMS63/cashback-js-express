@@ -14,7 +14,8 @@ router
     res.render('admin/newUser');
   })
   .post('/createUser', async (req, res) => {
-    // let newUser = await new User.create({ number: req.body.phone, password: req.body.pass });
+
+    let newUser = await new User({ number: req.body.phone, password: req.body.pass });
     res.redirect('/admin');
   })
   .post('/addCashback', (req, res) => {
@@ -22,20 +23,20 @@ router
   })
   .post('/addCashbackOn', async (req, res) => {
     console.log(req.body);
-    // let newCashback = await new Cashback.create({ });
+    let newCashback = await new Cashback({ });
     res.redirect('/admin');
   })
   .post('/unload', async (req, res) => {
-  //   if (req.body === 'xls') {
+    // if (req.body === 'xls') {
 
 
 
-  //     var content = toExcel.exportXLS(headers, data, 'filename');
-  //     require('fs').writeFileSync('filename.xls', content);
+    //   var content = toExcel.exportXLS(headers, data, 'filename');
+    //   require('fs').writeFileSync('filename.xls', content);
 
-  //   } else {
+    // } else {
 
-  //   };
+    // };
   })
   .post('/delete', async (req, res) => {
     res.render('admin/deleteUser');
