@@ -4,6 +4,11 @@ const User = require('../models/users')
 
 
 
+router.route('/image')
+  .get((req, res) => {
+    res.render('index');
+  })
+
 router.get('/', (req, res) => {
   res.render('authorization');
 });
