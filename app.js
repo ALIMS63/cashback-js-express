@@ -77,7 +77,6 @@ app.use((req, res, next) => {
 })
 
 
-app.use('/', mainRouter);
 
 function userCheck(req, res, next) {
   console.log(res.locals.author)
@@ -104,10 +103,10 @@ function adminCheck(req, res, next) {
     return res.redirect('/')
   }
 }
-
+// ----------------------------------------------------------------------ROUTES
+app.use('/', mainRouter);
 app.use('/admin', adminCheck, adminRouter);
 app.use('/user', userCheck, userRouter);
-
 // ----------------------------------------------------------------------ROUTES
 
 // catch 404 and forward to error handler
