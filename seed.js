@@ -26,12 +26,12 @@ db.then(async ({ disconnect, connection }) => {
       number: '+7(777) 777 - 77 - 77',
       password: '123',
       admin: true,
-      cashbackHistory: [cashbacks[0]]
+      cashbackHistory: []
     }).save(),
     new User({
       number: '+7(777) 888 - 77 - 77',
       password: '123',
-      cashbackHistory: [cashbacks[1], cashbacks[2]]
+      cashbackHistory: [cashbacks[1], cashbacks[0]]
     }).save(),
     new User({
       number: '+7(777) 999 - 77 - 77',

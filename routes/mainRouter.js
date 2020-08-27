@@ -2,7 +2,14 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/users')
 
-
+router.use((req, res, next) => {
+  if (req.session.invalidpass) {
+    res.locals.invalidpass = true;
+  } else {
+    res.locals.invalidpass = false;
+  }
+  next()
+})
 
 router.route('/image')
   .get((req, res) => {
@@ -15,17 +22,16 @@ router.get('/', (req, res) => {
 
 router.post('/api', async (req, res) => {
   const person = await User.find({ number: req.body.number, password: req.body.password })
-  console.log(person[0])
   if (person.length != 0) {
     req.session.invalidpass = false
-    req.session.admin = person[0].admin
-    if (person[0].admin) {
-      res.redirect('/admin')
-    } else {
-      res.redirect('/user')
-    }
+    console.log(person[0].number)
+    console.log(req.session.user)
+    req.session.user = person[0].number
+    console.log(req.session.user)
+    res.redirect('/admin')
   }
   req.session.invalidpass = true
+  console.log(req.session.invalidpass)
   res.redirect('/')
 })
 

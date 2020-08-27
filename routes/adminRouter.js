@@ -12,14 +12,14 @@ router
   .get('/', (req, res) => {
     res.render('admin/admin');
   })
-  .post('/create', (req, res) => {
+  .get('/create', (req, res) => {
     res.render('admin/newUser');
   })
   .post('/createUser', async (req, res) => {
     let newUser = await new User({ number: req.body.phone, password: req.body.pass, cashbackAll: 0 }).save();
     res.redirect('/admin');
   })
-  .post('/addCashback', (req, res) => {
+  .get('/addCashback', (req, res) => {
     res.render('admin/addCashback');
   })
   .post('/addCashbackOn', async (req, res) => {
@@ -45,7 +45,7 @@ router
 
     // };
   })
-  .post('/delete', async (req, res) => {
+  .get('/delete', async (req, res) => {
     res.render('admin/deleteUser');
   })
   .post('/deleteUser', async (req, res) => {
