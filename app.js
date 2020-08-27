@@ -70,6 +70,15 @@ app.use(methodOverride(function (req, res) {
 }));
 
 // ----------------------------------------------------------------------ROUTES
+app.use((req, res, next) => {
+  //неправильный пароль
+  if (req.session.invalidpass) {
+    res.locals.invalidpass = true;
+  } else {
+    res.locals.invalidpass = false;
+  }
+  next()
+})
 app.use('/', mainRouter);
 app.use('/admin', adminRouter);
 app.use('/user', userRouter);

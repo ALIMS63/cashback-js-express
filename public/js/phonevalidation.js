@@ -43,6 +43,9 @@ const formatToPhone = (event) => {
 };
 
 const inputElement = document.getElementById('phoneNumber');
-console.log('here')
-inputElement.addEventListener('keydown', enforceFormat);
-inputElement.addEventListener('keyup', formatToPhone);
+console.log(inputElement)
+if (inputElement) {
+  inputElement.addEventListener('keydown', enforceFormat);
+  inputElement.addEventListener('keyup', formatToPhone);
+}
+

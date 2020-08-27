@@ -2,8 +2,8 @@
   <form id='authorizationform' method="post" action="/api">
     <div class="form-group">
       <label for="exampleInputEmail1">Phone number</label>
-      <input id="phoneNumber" name="number" type="text" class="form-control" id="exampleInputEmail1"
-        aria-describedby="emailHelp" value="+7" maxlength="21">
+      <input id="phoneNumber" name="number" type="text" class="form-control" aria-describedby="emailHelp" value="+7"
+        maxlength="21">
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Password</label>
@@ -15,5 +15,3 @@
     <h3>Invalid password or number</h3>
     {{/if}}
 </div>
-
-<script src="js/phonevalidation.js"></script>
