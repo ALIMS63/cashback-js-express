@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/users')
 
 router.use((req, res, next) => {
+  //неправильный пароль
   if (req.session.invalidpass) {
     res.locals.invalidpass = true;
   } else {
