@@ -6,6 +6,8 @@ const Cashback = require('../models/cashbacks')
 
 const router = express.Router();
 
+
+
 router
   .get('/', (req, res) => {
     res.render('admin/admin');
@@ -20,9 +22,9 @@ router
   .post('/addCashback', (req, res) => {
     res.render('admin/addCashback');
   })
-  .post ('/addCashbackOn', async (req, res) => {
+  .post('/addCashbackOn', async (req, res) => {
     // let newCashback = await new Cashback.create({ });
     res.render('admin/addCashbackOn');
   })
- 
+
 module.exports = router;

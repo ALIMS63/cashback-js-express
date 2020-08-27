@@ -46,17 +46,18 @@ app.use(
   })
 );
 
-app.use((req, res, next) => {
-  res.locals.isAuth = !!req.session.user;
-  if (req.session.user) {
-    res.locals.user = req.session.user;
-    res.locals.userName = req.session.user.name;
-  };
-  if (req.cookies.user_sid && !req.session.user) {
-    res.clearCookie('user_sid');
-  };
-  next();
-});
+// app.use((req, res, next) => {
+//   res.locals.isAuth = !!req.session.user;
+//   if (req.session.user) {
+//     res.locals.user = req.session.user;
+//     res.locals.userName = req.session.user.name;
+//   };
+//   if (req.cookies.user_sid && !req.session.user) {
+//     res.clearCookie('user_sid');
+//   };
+//   next();
+// });
+
 
 
 // Allows you to use PUT, DELETE with forms.
@@ -77,11 +78,45 @@ app.use((req, res, next) => {
   } else {
     res.locals.invalidpass = false;
   }
+  //проверка прав
+  if (req.session.admin === true) {
+    req.session.author = true
+  } else if (req.session.admin === false) {
+    req.session.author = true
+  }
   next()
 })
+
 app.use('/', mainRouter);
-app.use('/admin', adminRouter);
-app.use('/user', userRouter);
+
+function userCheck(req, res, next) {
+  console.log(res.locals.author)
+  if (req.session.author) {
+    if (req.session.admin === true) {
+      return res.redirect('/admin')
+    } else {
+      return next()
+    }
+  } else {
+    return res.redirect('/')
+  }
+}
+
+function adminCheck(req, res, next) {
+  console.log(res.locals.author)
+  if (req.session.author) {
+    if (req.session.admin === false) {
+      return res.redirect('/user')
+    } else {
+      return next()
+    }
+  } else {
+    return res.redirect('/')
+  }
+}
+
+app.use('/admin', adminCheck, adminRouter);
+app.use('/user', userCheck, userRouter);
 
 // ----------------------------------------------------------------------ROUTES
 

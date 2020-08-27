@@ -1,7 +1,9 @@
 const express = require('express');
-const User = require('../models/users.js')
+const User = require('../models/users.js');
+const { unregisterDecorator } = require('handlebars');
 
 const router = express.Router();
+
 
 router
   .get('/', async (req, res) => {

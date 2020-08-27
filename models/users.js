@@ -5,6 +5,10 @@ const UserSchema = mongoose.Schema({
   number: String,
   password: String,
   cashbackAll: Number,
+  admin: {
+    default: false,
+    type: Boolean,
+  },
   cashbackHistory: [{
     type: mongoose.ObjectId,
     ref: 'Cashback'

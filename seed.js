@@ -23,18 +23,19 @@ db.then(async ({ disconnect, connection }) => {
   ])
   const users = await Promise.all([
     new User({
-      number: '8-928-232-67-45',
-      password: '8-928-232-67-45',
+      number: '+7(777) 777 - 77 - 77',
+      password: '123',
+      admin: true,
       cashbackHistory: [cashbacks[0]]
     }).save(),
     new User({
-      number: '8-800-555-35-35',
-      password: '8-800-555-35-35',
+      number: '+7(777) 888 - 77 - 77',
+      password: '123',
       cashbackHistory: [cashbacks[1], cashbacks[2]]
     }).save(),
     new User({
-      number: '8-914-125-75-34',
-      password: '8-914-125-75-34',
+      number: '+7(777) 999 - 77 - 77',
+      password: '123',
       cashbackHistory: [cashbacks[1], cashbacks[2]]
     }).save(),
   ])
