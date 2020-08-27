@@ -3,7 +3,7 @@ const express = require('express');
 // const salt = 10;
 const User = require('../models/users');
 const Cashback = require('../models/cashbacks')
-
+let toExcel = require('to-excel').toExcel;
 const router = express.Router();
 
 router
@@ -14,15 +14,35 @@ router
     res.render('admin/newUser');
   })
   .post('/createUser', async (req, res) => {
-    let newUser = await new User.create({ number: req.body.phone, password: req.body.pass });
-    res.render('admin/secessCreated');
+    // let newUser = await new User.create({ number: req.body.phone, password: req.body.pass });
+    res.redirect('/admin');
   })
   .post('/addCashback', (req, res) => {
     res.render('admin/addCashback');
   })
-  .post ('/addCashbackOn', async (req, res) => {
+  .post('/addCashbackOn', async (req, res) => {
+    console.log(req.body);
     // let newCashback = await new Cashback.create({ });
-    res.render('admin/addCashbackOn');
+    res.redirect('/admin');
   })
- 
+  .post('/unload', async (req, res) => {
+  //   if (req.body === 'xls') {
+
+
+
+  //     var content = toExcel.exportXLS(headers, data, 'filename');
+  //     require('fs').writeFileSync('filename.xls', content);
+
+  //   } else {
+
+  //   };
+  })
+  .post('/delete', async (req, res) => {
+    res.render('admin/deleteUser');
+  })
+  .post('/deleteUser', async (req, res) => {
+    // let delUser = await User.delete({number: req.body.phone})
+    res.redirect('/admin')
+  })
+
 module.exports = router;
