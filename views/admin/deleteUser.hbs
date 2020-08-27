@@ -1,8 +1,12 @@
 <div id="container">
   <h1>Delete User</h1>
   <form action="/admin/deleteUser" method="post">
-    <input type="tel" name="phone" placeholder="Phone">
+    <label>Phone</label>
+    <input id="phoneNumber" type="tel" name="phone" placeholder="Phone" value="+7" maxlength="21">
+    <label>Password</label>
     <input type="text" name="pass" placeholder="Password">
     <button type="submit">Delete</button>
   </form>
 </div>
+
+<script src="/js/phonevalidation.js"></script>

@@ -47,7 +47,10 @@ router
     res.render('admin/deleteUser');
   })
   .post('/deleteUser', async (req, res) => {
-    // let delUser = await User.delete({number: req.body.phone})
+    let userForDel = await User.findOne({ number: req.body.phone });
+    if (userForDel.password === req.body.pass) {
+      let userDelete = await User.deleteOne({ number: req.body.phone })
+    }
     res.redirect('/admin')
   })
 
