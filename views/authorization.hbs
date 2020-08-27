@@ -10,8 +10,9 @@
       <input id="password-input" name="password" type="password" class="form-control" id="exampleInputPassword1"
         placeholder="Password">
     </div>
-    <button type="submit" class="btn btn-primary">Sing in</button>
-  </form>
+    {{#if invalidpass}}
+    <h3>Invalid password or number</h3>
+    {{/if}}
 </div>
 
 <script src="js/phonevalidation.js"></script>
