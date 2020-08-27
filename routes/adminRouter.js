@@ -3,7 +3,18 @@ const express = require('express');
 // const salt = 10;
 const User = require('../models/users');
 const Cashback = require('../models/cashbacks')
-let toExcel = require('to-excel').toExcel;
+// let toExcel = require('to-excel').toExcel;
+let excel = require('excel4node');
+let workbook = new excel.Workbook();
+let worksheet = workbook.addWorksheet('Sheet 1');
+let style = workbook.createStyle({
+  font: {
+    color: '#FF0800',
+    size: 12,
+  },
+  numberFormat: '$#,##0.00; ($#,##0.00); -',
+});
+
 const router = express.Router();
 
 router
@@ -32,16 +43,34 @@ router
     res.redirect('/admin');
   })
   .post('/unload', async (req, res) => {
-    // if (req.body === 'xls') {
-
-
-
-    //   var content = toExcel.exportXLS(headers, data, 'filename');
-    //   require('fs').writeFileSync('filename.xls', content);
-
-    // } else {
-
-    // };
+    let dataForOut = await User.find();
+    if (req.body.docType === 'xls') {
+      worksheet.cell(1, 1)
+        .string('User')
+        .style(style);
+      worksheet.cell(1, 2)
+        .string('Cashback')
+        .style(style);
+      for (let i = 0; i < dataForOut.length; i++) {
+        worksheet.cell(i + 2, 1)
+          .string(dataForOut[i].number)
+          .style(style);
+        worksheet.cell(i + 2, 2)
+          .number(dataForOut[i].cashbackAll)
+          .style(style);
+      }
+      workbook.write('Cashback.xlsx', res);
+    } else if (req.body.docType === 'csv') {
+      let fullString = '';
+      for (let i = 0; i < dataForOut.length; i++) {
+        fullString += `${dataForOut[i].number}` + ', ' + `${dataForOut[i].cashbackAll}` + `\n`;
+      }
+      res.set({
+        'Content-Type': 'application/CSV',
+        "Content-Disposition": "attachment;filename=Cashback.csv"
+      });
+      res.send(fullString);
+    };
   })
   .post('/delete', async (req, res) => {
     res.render('admin/deleteUser');
@@ -49,9 +78,9 @@ router
   .post('/deleteUser', async (req, res) => {
     let userForDel = await User.findOne({ number: req.body.phone });
     if (userForDel.password === req.body.pass) {
-      let userDelete = await User.deleteOne({ number: req.body.phone })
+      let userDelete = await User.deleteOne({ number: req.body.phone });
     }
-    res.redirect('/admin')
+    res.redirect('/admin');
   })
 
 module.exports = router;
