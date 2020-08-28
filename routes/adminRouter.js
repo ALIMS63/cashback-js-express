@@ -1,8 +1,6 @@
 const express = require('express');
-// const bcrypt = require('bcrypt');
-// const salt = 10;
-const User = require('../models/users');
-const Cashback = require('../models/cashbacks')
+const User = require('../db/models/users');
+const Cashback = require('../db/models/cashbacks')
 // let toExcel = require('to-excel').toExcel;
 let excel = require('excel4node');
 let workbook = new excel.Workbook();
@@ -16,8 +14,6 @@ let style = workbook.createStyle({
 });
 
 const router = express.Router();
-
-
 
 router
   .get('/', (req, res) => {
@@ -69,7 +65,7 @@ router
       }
       res.set({
         'Content-Type': 'application/CSV',
-        "Content-Disposition": "attachment;filename=Cashback.csv"
+        'Content-Disposition': 'attachment;filename=Cashback.csv',
       });
       res.send(fullString);
     };
@@ -78,11 +74,17 @@ router
     res.render('admin/deleteUser');
   })
   .post('/deleteUser', async (req, res) => {
-    let userForDel = await User.findOne({ number: req.body.phone });
-    if (userForDel.password === req.body.pass) {
-      let userDelete = await User.deleteOne({ number: req.body.phone });
-    }
-    res.redirect('/admin');
-  })
+    let userForDelCashback = await User.findOne({ number: req.body.phone });
 
+    userCashbackHistory = userForDelCashback.cashbackHistory;
+    usecCashbackHistory.forEach(async (element) => {
+      cashbackForDel = await Cashback.findOne({ _id: element });
+      if (cashbackForDel.cashback === req.body.cashback) {
+        cashbackAllChange = userForDelCashback.cashbackAll - req.body.cashback;
+        let cashbackAllDown = await User.updateOne({ number: req.body.phone }, { cashbackAll: cashbackAllChange });
+        let cashbackDelete = await Cashback.deleteOne({ _id: element });
+        res.redirect('/admin');
+      }
+    })
+  })
 module.exports = router;

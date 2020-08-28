@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Cashback = require('./cashbacks.js');
+const Cashback = require('./cashbacks');
 
 const UserSchema = mongoose.Schema({
   number: String,
