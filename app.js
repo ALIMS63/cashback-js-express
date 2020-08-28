@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const methodOverride = require('method-override');
+require('dotenv').config();
 
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
@@ -18,7 +19,7 @@ const app = express();
 
 // Подключаем mongoose.
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://pavel:134qerADF@cluster0.bnkdi.mongodb.net/<dbname>?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGO_DB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -72,6 +73,9 @@ app.use((req, res, next) => {
   } else if (req.session.admin === false) {
     res.locals.logout = true
     req.session.author = true
+  }
+  if (req.session.smssend) {
+    res.locals.smssend = true
   }
   next()
 })

@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/users')
+require('dotenv').config();
+
 router.route('/image')
   .get((req, res) => {
     res.render('index');
@@ -28,6 +30,26 @@ router.get('/api/logout', (req, res) => {
   console.log('im here')
   req.session.destroy()
   res.locals.logout = false
+  res.redirect('/')
+})
+
+router.post('/telephone', async (req, res) => {
+  const accountSid = 'ACed3dc2afb8dde4cb42c75b24ccaf3561';
+  const authToken = process.env.TWILO;
+  const client = require('twilio')(accountSid, authToken);
+  const newUser = await new User({
+    number: req.body.number,
+    password: 123
+  })
+  console.log(req.body.number.split(/([+\d+])+/).join())
+  client.messages
+    .create({
+      body: '123',
+      from: '+14787724166',
+      to: '9150820751'
+    })
+    .then(message => console.log(message.sid));
+  req.session.smssend = true
   res.redirect('/')
 })
 
