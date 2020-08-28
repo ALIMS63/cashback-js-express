@@ -1,8 +1,6 @@
 const express = require('express');
-// const bcrypt = require('bcrypt');
-// const salt = 10;
-const User = require('../models/users');
-const Cashback = require('../models/cashbacks')
+const User = require('../db/models/users');
+const Cashback = require('../db/models/cashbacks')
 // let toExcel = require('to-excel').toExcel;
 let excel = require('excel4node');
 let workbook = new excel.Workbook();
