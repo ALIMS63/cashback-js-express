@@ -82,6 +82,9 @@ app.use((req, res, next) => {
   if (req.session.cantfind) {
     res.locals.cantfind = true
   }
+  if (!req.session.isvalidnumber) {
+    req.session.numbertoput = '+7'
+  }
   next()
 })
 

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/users');
+const User = require('../db/models/users');
 const { registerDecorator } = require('handlebars');
 require('dotenv').config();
 
@@ -10,7 +10,7 @@ router.route('/image')
     res.render('index');
   })
 router.get('/', (req, res) => {
-  res.render('authorization');
+  res.render('authorization', { number: req.session.numbertoput });
 });
 router.post('/api', async (req, res) => {
   const person = await User.findOne({ number: req.body.number, password: req.body.password })
@@ -64,6 +64,8 @@ router.post('/telephone', async (req, res) => {
       .then(message => console.log(message.sid));
     //выводит возможность ввести пароль
     req.session.smssend = true
+    req.session.isvalidnumber = true
+    req.session.numbertoput = req.body.number
     return res.redirect('/')
   } else {
     //выводит нет данного телефона в базе
