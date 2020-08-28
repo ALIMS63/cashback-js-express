@@ -74,8 +74,13 @@ app.use((req, res, next) => {
     res.locals.logout = true
     req.session.author = true
   }
+  //проверка отправки sms
   if (req.session.smssend) {
     res.locals.smssend = true
+  }
+  //нет данного номера в базе
+  if (req.session.cantfind) {
+    res.locals.cantfind = true
   }
   next()
 })

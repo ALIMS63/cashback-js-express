@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/users')
+const User = require('../models/users');
+const { registerDecorator } = require('handlebars');
 require('dotenv').config();
 
 router.route('/image')
@@ -33,24 +34,45 @@ router.get('/api/logout', (req, res) => {
   res.redirect('/')
 })
 
+//отправка sms
 router.post('/telephone', async (req, res) => {
+  //подключение twilio
   const accountSid = 'ACed3dc2afb8dde4cb42c75b24ccaf3561';
   const authToken = process.env.TWILO;
   const client = require('twilio')(accountSid, authToken);
-  const newUser = await new User({
-    number: req.body.number,
-    password: 123
-  })
-  console.log(req.body.number.split(/([+\d+])+/).join())
-  client.messages
-    .create({
-      body: '123',
-      from: '+14787724166',
-      to: '9150820751'
-    })
-    .then(message => console.log(message.sid));
-  req.session.smssend = true
-  res.redirect('/')
+  //поиск юзера по базе
+  const currentUser = await User.findOne({ number: req.body.number })
+  //валидация инпута телефона
+  req.body.number.match(/\+|[\d]+/g).join('')
+  if (currentUser) {
+    //если пользователь найден
+    //создание пароля
+    const digits = '0123456789';
+    let newPass = '';
+    for (let i = 0; i < 4; i++) {
+      newPass += digits[Math.floor(Math.random() * 10)];
+    }
+    await User.updateOne({ _id: currentUser._id }, { $set: { password: newPass } })
+    client.messages
+      .create({
+        body: `${newPass}`,
+        from: '+14787724166',
+        to: req.body.number.match(/\+|[\d]+/g).join('')
+      })
+      .then(message => console.log(message.sid));
+    //выводит возможность ввести пароль
+    req.session.smssend = true
+    return res.redirect('/')
+  } else {
+    //выводит нет данного телефона в базе
+    req.session.cantfind = true
+    res.redirect('/')
+  }
 })
 
+//есть пароль
+router.post('/havepassword', (req, res) => {
+  req.session.smssend = true
+  return res.redirect('/')
+})
 module.exports = router;

@@ -3,7 +3,19 @@
   justify-content: center;
   padding-top: 100px;
 }
+#authorization2 {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+#cantfind {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
 #password-input {
   width: 500px;
 }
-
+#authorizationform {
+  width: 500px;
+}

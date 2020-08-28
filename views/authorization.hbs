@@ -2,24 +2,35 @@
 <div id='authorization'>
   <form id='authorizationform' method="post" action="/api">
     <div class="form-group">
-      <label for="exampleInputEmail1">Phone number</label>
+      <label for="exampleInputEmail1">Номер телефона</label>
       <input id="phoneNumber" name="number" type="text" class="form-control" aria-describedby="emailHelp" value="+7"
         maxlength="21">
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
+      <label for="exampleInputPassword1">Пароль</label>
       <input id="password-input" name="password" type="password" class="form-control" placeholder=" Password">
     </div>
-    <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Sing in</button>
+    <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Войти</button>
 </div>
 {{else}}
 <div id='authorization'>
   <form id='authorizationform' method="post" action="/telephone">
     <div class="form-group">
-      <label for="exampleInputEmail1">Phone number</label>
-      <input id="phoneNumber" name="number" type="text" class="form-control" aria-describedby="emailHelp" value="+7"
-        maxlength="21">
+      <label for="exampleInputEmail1">Номер телефона</label>
+      <input id="phoneNumber" name="number" type="text" class="form-control abcd" aria-describedby="emailHelp"
+        value="+7" maxlength="21">
     </div>
-    <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Sing in</button>
+    <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Отправить смс</button>
+  </form>
+</div>
+{{#if cantfind}}
+<small id="cantfind" class="form-text text-muted">Указанного номера телефона нет в базе, либо неправильно введен
+  номер</small>
+{{/if}}
+<div id='authorization2'>
+  <form method="post" action="/havepassword">
+    <div class="form-group">
+      <button type="submit" class="btn btn-success">Уже есть пароль?</button>
+    </div>
 </div>
 {{/if}}
