@@ -67,7 +67,7 @@ router
       }
       res.set({
         'Content-Type': 'application/CSV',
-        "Content-Disposition": "attachment;filename=Cashback.csv"
+        'Content-Disposition': 'attachment;filename=Cashback.csv',
       });
       res.send(fullString);
     };
@@ -76,11 +76,14 @@ router
     res.render('admin/deleteUser');
   })
   .post('/deleteUser', async (req, res) => {
-    let userForDel = await User.findOne({ number: req.body.phone });
-    if (userForDel.password === req.body.pass) {
-      let userDelete = await User.deleteOne({ number: req.body.phone });
-    }
-    res.redirect('/admin');
+    let userForDelCashback = await User.findOne({ number: req.body.phone });
+    userForDelCashback = userForDelCashback.cashbackHistory;
+    userForDelCashback.forEach(async (element) => {
+      cashbackForDel = await Cashback.findOne({ _id: element });
+      if (cashbackForDel.cashback === req.body.pass) {
+        let cashbackDelete = await Cashback.deleteOne({ _id: element });
+      }
+    })
   })
 
 module.exports = router;

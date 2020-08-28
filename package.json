@@ -21,6 +21,7 @@
   "homepage": "https://github.com/ALIMS63/cashback-js-express#readme",
   "dependencies": {
     "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
     "excel4node": "^1.7.2",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
@@ -29,7 +30,8 @@
     "method-override": "^3.0.0",
     "mongoose": "^5.10.0",
     "morgan": "^1.10.0",
-    "session-file-store": "^1.4.0"
+    "session-file-store": "^1.4.0",
+    "twilio": "^3.49.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
