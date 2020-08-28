@@ -17,8 +17,6 @@ let style = workbook.createStyle({
 
 const router = express.Router();
 
-
-
 router
   .get('/', (req, res) => {
     res.render('admin/admin');
@@ -79,13 +77,16 @@ router
   })
   .post('/deleteUser', async (req, res) => {
     let userForDelCashback = await User.findOne({ number: req.body.phone });
-    userForDelCashback = userForDelCashback.cashbackHistory;
-    userForDelCashback.forEach(async (element) => {
+
+    userCashbackHistory = userForDelCashback.cashbackHistory;
+    usecCashbackHistory.forEach(async (element) => {
       cashbackForDel = await Cashback.findOne({ _id: element });
-      if (cashbackForDel.cashback === req.body.pass) {
+      if (cashbackForDel.cashback === req.body.cashback) {
+        cashbackAllChange = userForDelCashback.cashbackAll - req.body.cashback;
+        let cashbackAllDown = await User.updateOne({ number: req.body.phone }, { cashbackAll: cashbackAllChange });
         let cashbackDelete = await Cashback.deleteOne({ _id: element });
+        res.redirect('/admin');
       }
     })
   })
-
 module.exports = router;
