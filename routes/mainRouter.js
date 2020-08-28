@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/users')
+const User = require('../db/models/users');
 require('dotenv').config();
+
 
 router.route('/image')
   .get((req, res) => {
@@ -11,15 +12,15 @@ router.get('/', (req, res) => {
   res.render('authorization');
 });
 router.post('/api', async (req, res) => {
-  const person = await User.find({ number: req.body.number, password: req.body.password })
-  console.log(person[0])
-  if (person.length != 0) {
-    req.session.invalidpass = false
-    req.session.admin = person[0].admin
-    if (person[0].admin) {
-      res.redirect('/admin')
+  const person = await User.findOne({ number: req.body.number, password: req.body.password })
+  console.log(person)
+  if (person) {
+    req.session.invalidpass = false;
+    req.session.admin = person.admin;
+    if (person.admin) {
+      res.redirect('/admin');
     } else {
-      res.redirect('/user')
+      res.redirect(`/user/${person._id}`);
     }
   }
   req.session.invalidpass = true

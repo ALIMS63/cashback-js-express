@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/ALIMS63/cashback-js-express#readme",
   "dependencies": {
-    "bcrypt": "^5.0.0",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "excel4node": "^1.7.2",
