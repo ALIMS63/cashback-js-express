@@ -18,6 +18,7 @@ router.post('/api', async (req, res) => {
   if (person) {
     req.session.invalidpass = false;
     req.session.admin = person.admin;
+    req.session.userid = person._id;
     if (person.admin) {
       res.redirect('/admin');
     } else {

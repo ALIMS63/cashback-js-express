@@ -1,6 +1,6 @@
 const express = require('express');
 const User = require('../db/models/users');
-const Cashback = require('../db/models/cashbacks')
+const Cashback = require('../db/models/cashbacks');
 // let toExcel = require('to-excel').toExcel;
 let excel = require('excel4node');
 let workbook = new excel.Workbook();
@@ -40,25 +40,25 @@ router
     let userUpdate = await User.updateOne({ _id: userForUpdate._id }, { cashbackAll: cashbackCalc, cashbackHistory: userCashback });
     res.redirect('/admin');
   })
-  .post('/unload', async (req, res) => {
+  .get('/unload', async (req, res) => {
     let dataForOut = await User.find();
-    if (req.body.docType === 'xls') {
-      worksheet.cell(1, 1)
-        .string('User')
-        .style(style);
-      worksheet.cell(1, 2)
-        .string('Cashback')
-        .style(style);
-      for (let i = 0; i < dataForOut.length; i++) {
-        worksheet.cell(i + 2, 1)
-          .string(dataForOut[i].number)
-          .style(style);
-        worksheet.cell(i + 2, 2)
-          .number(dataForOut[i].cashbackAll)
-          .style(style);
-      }
-      workbook.write('Cashback.xlsx', res);
-    } else if (req.body.docType === 'csv') {
+    // if (req.body.docType === 'xls') {
+      // worksheet.cell(1, 1)
+      //   .string('User')
+      //   .style(style);
+      // worksheet.cell(1, 2)
+      //   .string('Cashback')
+      //   .style(style);
+      // for (let i = 0; i < dataForOut.length; i++) {
+      //   worksheet.cell(i + 2, 1)
+      //     .string(dataForOut[i].number)
+      //     .style(style);
+      //   worksheet.cell(i + 2, 2)
+      //     .string(dataForOut[i].cashbackAll)
+      //     .style(style);
+      // }
+      // workbook.write('Cashback.xlsx', res);
+    // } else if (req.body.docType === 'csv') {
       let fullString = '';
       for (let i = 0; i < dataForOut.length; i++) {
         fullString += `${dataForOut[i].number}` + ', ' + `${dataForOut[i].cashbackAll}` + `\n`;
@@ -68,7 +68,7 @@ router
         'Content-Disposition': 'attachment;filename=Cashback.csv',
       });
       res.send(fullString);
-    };
+    // };
   })
   .get('/delete', async (req, res) => {
     res.render('admin/deleteUser');

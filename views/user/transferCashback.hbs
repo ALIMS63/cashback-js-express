@@ -1,0 +1,29 @@
+<nav class="nav nav-pills nav-justified bg-success border border-bottom-10">
+  <a class="nav-item nav-link text-white" href="/user/transferCashback">Передать кэш-бэк</a>
+  <a class="nav-item nav-link text-white" href="#">Link</a>
+  <a class="nav-item nav-link text-white" href="/api/logout">Выход</a>
+</nav>
+
+<div id="container">
+  <div class="row justify-content-md-center">
+    <div class="col-8">
+      <h1>Передать кэш-бэк</h1>
+      <form action="/user/transferCashbackOn" method="post">
+        <div class="form-group">
+          <label>Телефон пользователя, которому Вы хотите передать кэш-бэк</label>
+          <input name="phone" type="tel" class="form-control" placeholder="Phone" id="phoneNumber" value="+7"
+            maxlength="21">
+        </div>
+        <div class="form-group">
+          <label>Сумма передаваемого кэш-бэка</label>
+          <input name="cashback" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Сообщение</label>
+          <input name="cause" type="text" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-success btn-block">Добавить</button>
+      </form>
+    </div>
+  </div>
+</div>
