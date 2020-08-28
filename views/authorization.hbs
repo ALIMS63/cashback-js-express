@@ -3,8 +3,8 @@
   <form id='authorizationform' method="post" action="/api">
     <div class="form-group">
       <label for="exampleInputEmail1">Номер телефона</label>
-      <input id="phoneNumber" name="number" type="text" class="form-control" aria-describedby="emailHelp" value="+7"
-        maxlength="21">
+      <input id="phoneNumber" name="number" type="text" class="form-control" aria-describedby="emailHelp" maxlength="21"
+        value="{{number}}">
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Пароль</label>
@@ -18,7 +18,7 @@
     <div class="form-group">
       <label for="exampleInputEmail1">Номер телефона</label>
       <input id="phoneNumber" name="number" type="text" class="form-control abcd" aria-describedby="emailHelp"
-        value="+7" maxlength="21">
+        value="{{number}}" maxlength="21">
     </div>
     <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Отправить смс</button>
   </form>
