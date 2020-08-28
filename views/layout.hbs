@@ -4,8 +4,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script defer src="/js/application.js"></script>
+  <script defer src="/js/phonevalidation.js"></script>
+  <title>CASHBACK</title>
+
 </head>
+
+<div id="navbarmain">
+  <nav class="navbar d-flex justify-content-between" id="menu">
+    <img src="/img/logo7.png" id="logo">
+    {{#if logout}}
+    <a class="navbar-brand" href="/api/logout"><button class="btn btn-light" type="submit" id='logout'>Log
+        out</button></a>
+    {{/if}}
+  </nav>
+</div>
+
 
 <body>
 

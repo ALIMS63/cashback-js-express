@@ -1,0 +1,9 @@
+#authorization {
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+}
+#password-input {
+  width: 500px;
+}
+

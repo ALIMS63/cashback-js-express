@@ -1,0 +1,34 @@
+<nav class="nav nav-pills nav-justified bg-success border border-bottom-10">
+  <a id="create" class="nav-item nav-link text-white" href="/admin/create">Create new User</a>
+  <a id="charge" class="nav-item nav-link text-white" href="/admin/addCashback">Charge cashback</a>
+  <a id="unload" class="nav-item nav-link text-white" href="/admin/unload">Unload Cashback</a>
+  <a id="delete" class="nav-item nav-link text-white" href="/admin/delete">Delete Cashback</a>
+</nav>
+
+<div id="container">
+  <div class="row justify-content-md-center">
+    <div class="col-8">
+      <h1>Add cashback</h1>
+      <form action="/admin/addCashbackOn" method="post">
+        <div class="form-group">
+          <label>Phone</label>
+          <input name="phone" type="tel" class="form-control" placeholder="Phone" id="phoneNumber" value="+7"
+            maxlength="21">
+        </div>
+        <div class="form-group">
+          <label>Cashback</label>
+          <input name="cashback" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Cause</label>
+          <input name="cause" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input name="orderCost" type="password" class="form-control" id="orderCost">
+        </div>
+        <button type="submit" class="btn btn-success btn-block">Add</button>
+      </form>
+    </div>
+  </div>
+</div>

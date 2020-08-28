@@ -7,29 +7,35 @@ db.then(async ({ disconnect, connection }) => {
   const cashbacks = await Promise.all([
     new Cashback({
       cashback: 200,
-      description: 'For your purchase #1',
-      createdAt: Date.now(),
+      cost: '33200',
+      cause: 'Order 956702',
     }).save(),
     new Cashback({
       cashback: 400,
-      description: 'Gift',
-      createdAt: Date.now(),
+      cost: '-',
+      cause: 'Gift',
     }).save(),
     new Cashback({
       cashback: -330,
-      description: 'For your purchase #2',
-      createdAt: Date.now(),
+      cost: '1200',
+      cause: 'Order 1233131',
     }).save(),
   ])
   const users = await Promise.all([
     new User({
-      number: '8999999999',
-      password: '8999999999',
-      cashbackHistory: [cashbacks[0]]
+      number: '+7(777) 777 - 77 - 77',
+      password: '123',
+      admin: true,
+      cashbackHistory: []
     }).save(),
     new User({
-      number: '8-800-555-35-35',
-      password: '8-800-555-35-35',
+      number: '+7(777) 888 - 77 - 77',
+      password: '123',
+      cashbackHistory: [cashbacks[1], cashbacks[0]]
+    }).save(),
+    new User({
+      number: '+7(777) 999 - 77 - 77',
+      password: '123',
       cashbackHistory: [cashbacks[1], cashbacks[2]]
     }).save(),
   ])

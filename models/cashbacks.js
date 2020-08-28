@@ -1,9 +1,13 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
 
-const CashbackSchema = new Schema({
+const CashbackSchema = mongoose.Schema({
   cashback: Number,
-  description: String,
-  createdAt: String,
+  cost: String,
+  cause: String,
+  createdAt: {
+    type: String,
+    default: new Date().toLocaleDateString(),
+  },
 });
 
-module.exports = model('Cashback', CashbackSchema);
+module.exports = mongoose.model('Cashback', CashbackSchema);
